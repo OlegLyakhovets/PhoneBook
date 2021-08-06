@@ -1,13 +1,13 @@
 package com.project.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.project.models.Numbers;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -15,11 +15,13 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
     private String firstName;
     private String lastName;
-    private String number;
+    @ElementCollection(targetClass = Numbers.class)
+    private Set<Numbers> numbers = new HashSet();
     private String email;
     private String address;
 
@@ -47,12 +49,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getNumber() {
-        return number;
+    public Set<Numbers> getNumbers() {
+         return numbers;
     }
 
     public void setNumber(String number) {
-        this.number = number;
+        this.numbers.add(new Numbers(number));
     }
 
     public String getEmail() {

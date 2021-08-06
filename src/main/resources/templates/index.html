@@ -12,9 +12,10 @@
 <div class="container mt-5">
     <h1>PHONEBOOK</h1>
        <div th:each="el : ${users}" class="alert alert-info mt-2">
-        <h3 th:text="${el.firstName}"/>
-        <p th:text="${el.lastName}"/>
-        <p th:text="${el.number}"/>
+        <h3 th:text="${el.firstName}+' ' +${el.lastName}"/>
+
+       <!-- <p th:each="nums : ${el.numbers}"></p>-->
+           <p th:text="${el.numbers}"></p>
         <p th:text="${el.email}"/>
         <p th:text="${el.address}"/>
        <!-- <a th:href="'/user/'+${el.id}">Details</a>-->
