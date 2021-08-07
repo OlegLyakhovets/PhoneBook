@@ -1,6 +1,22 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <style type="text/css">
+        header{
+        background-color: #ccccff;
+        }
+        h1{
+        font-size: 80px;
+         font-family: cursive;
+        font-weight: 600;
+        color: #000099;
+        }
+        h3{
+        font-size: 50px;
+        font-family: cursive;
+        font-weight: 600;
+        }
+    </style>
     <title>DEMO PHONEBOOK</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -10,7 +26,7 @@
 <header th:insert="blocks/header :: header"></header>
 
 <div class="container mt-5 mb-5">
-    <h1>Add new record to Phonebook</h1>
+    <h1 align="center">Add new record to Phonebook</h1>
     <form action="/add" method="post">
         <input type="text" name="firstName" placeholder="enter First Name" class="form-control"><br>
         <input type="text" name="lastName" placeholder="enter Last Name" class="form-control"><br>
