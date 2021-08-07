@@ -88,5 +88,52 @@ public class MainController {
         return "user-page";
     }
 
+    @GetMapping("/user/{last_name}/edit")
+    public String blogPageEdit(@PathVariable(name = "last_name") String last_name,
+                               Model model){
+        if(!repo.existsUserByLastName(last_name)) return "redirect:/";
+        Optional<User> posts = repo.findByLastName(last_name);
+        String f_name = repo.findByLastName(last_name).get().getFirstName();
+        String l_name = repo.findByLastName(last_name).get().getLastName();
+        List<Numbers> numbers = repo.findByLastName(last_name)
+                .get().getNumbers()
+                .stream().toList();
+        String email = repo.findByLastName(last_name).get().getEmail();
+        String address = repo.findByLastName(last_name).get().getAddress();
+        model.addAttribute("first_name", f_name);
+        model.addAttribute("last_name", l_name);
+        model.addAttribute("numbers", numbers);
+        model.addAttribute("email", email);
+        model.addAttribute("address", address);
+        return "user-edit";
+    }
+    @PostMapping("/user/{last_name}/edit")
+    public String editPost(@PathVariable(name = "last_name") String lName,
+                           @RequestParam String first_name, @RequestParam String last_name,
+                           @RequestParam String number,
+                           @RequestParam String email,
+                           @RequestParam String address, Model model){
+        user = repo.findByLastName(last_name).orElseThrow();
+        if(UserValidate.nameValidate(first_name)) user.setFirstName(first_name);
+        else return "redirect:/error";
+        if(UserValidate.nameValidate(last_name)) user.setLastName(last_name);
+        else return "redirect:/error";
+        if(UserValidate.numberValidate(number) &&
+        !user.getNumbers().contains(number))  user.setNumber(number);
+        else return "redirect:/error";
+        if(UserValidate.emailValidate(email))user.setEmail(email);
+        else return "redirect:/error";
+        user.setAddress(address);
+        repo.save(user);
+        return "redirect:/user/{last_name}";
+    }
+
+    @PostMapping("/user/{last_name}/delete")
+    public String deletePost(@PathVariable(name = "last_name") String last_name,
+                              Model model) {
+        User userDelete = repo.findByLastName(last_name).orElseThrow();
+        repo.delete(userDelete);
+        return "redirect:/";
+    }
 
 }

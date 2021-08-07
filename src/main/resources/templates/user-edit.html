@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style type="text/css">
-    div::after {
+       div::after {
          content: "";
          background: url('https://cdn.hipwallpaper.com/i/81/5/RKF5W1.jpg');
          opacity: 0.15;
@@ -13,11 +13,7 @@
          position: absolute;
          z-index: -1;
 }
-.phones{
-    font-size: 30px;
-    font-family: monospace;
-    font-weight: 500;
-}
+
         h1{
         font-size: 80px;
          font-family: cursive;
@@ -38,17 +34,17 @@
 
 <header th:insert="blocks/header :: header"></header>
 
-<div class="container mt-5">
-    <h1 align="center">PHONEBOOK</h1>
-       <div th:each="el : ${users}" class="alert alert-info mt-2">
-        <h3 align="center" th:text="${el.firstName}+' ' +${el.lastName}"/>
-           <div><p class="phones">Phones:</p>
-        <p th:each="nums : ${el.numbers}" th:text="${nums.number}"></p>
-    </div>
-        <p th:text="${el.email}"/>
-        <p th:text="${el.address}"/>
-       <a th:href="'/user/'+${el.lastName}">Details/Edit</a>
-    </div>
+<div class="container mt-5 mb-5">
+    <h1 align="center">Edit User information</h1>
+    <form method="post">
+        <input type="text" th:value="${first_name}" name="first_name" placeholder="enter First Name" class="form-control"><br>
+        <input type="text" th:value="${last_name}" name="last_name" placeholder="enter Last Name" class="form-control"><br>
+        <input type="text" th:value="${email}" name="email" placeholder="enter email" class="form-control"><br>
+        <input type="text" th:value="${address}" name="address" placeholder="enter address" class="form-control"><br>
+        <input type="text" name="number" placeholder="enter phone number" class="form-control"><br>
+        <button type="submit" class="btn btn-success">Update user information</button>
+    </form>
+
 </div>
 
 

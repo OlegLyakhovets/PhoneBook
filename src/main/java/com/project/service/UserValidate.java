@@ -10,6 +10,14 @@ public class UserValidate {
         if(name.length() == count) return true;
         else return false;
     }
+    public static boolean emailValidate(String name){
+        int count = 0;
+        for (int i = 0; i<name.length(); i++){
+            if((Character.compare('@', name.charAt(i)))==0) count++;
+        }
+        if(count == 1) return true;
+        else return false;
+    }
     public static boolean numberValidate(String number){
         int count = 0;
         for (int i = 0; i<number.length(); i++){
