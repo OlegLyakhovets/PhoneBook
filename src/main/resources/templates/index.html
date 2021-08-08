@@ -48,6 +48,13 @@
             <button>Search</button>
         </div>
     </form>
+    <form>
+        <div>
+            <label for="myNumber">Search by phone number</label>
+            <input type="search" id="myNumber" name="number">
+            <button>Search</button>
+        </div>
+    </form>
 
        <div th:each="el : ${users}" class="alert alert-info mt-2">
         <h3 align="center" th:text="${el.firstName}+' ' +${el.lastName}"/>

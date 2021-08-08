@@ -16,6 +16,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -36,6 +37,7 @@ public class MainController {
 
     @GetMapping("/")
     public String indexPage(@RequestParam(name = "last_name", required = false) String last_name,
+                            @RequestParam(name = "number", required = false) String number,
                             Model model){
         if(last_name != null)
         {
@@ -43,6 +45,14 @@ public class MainController {
             Optional<User> users = repo.findByLastName(last_name);
             model.addAttribute("users", users);
             model.addAttribute("last_name", last_name);
+            return "redirect:/user/{last_name}";
+        }
+        if(number != null)
+        {
+            User userF = repo.findByNumbers(number);
+            model.addAttribute("last_name", userF.getLastName());
+            model.addAttribute("users", userF);
+            model.addAttribute("number", number);
             return "redirect:/user/{last_name}";
         }
         Iterable<User> users = repo.findAll();
