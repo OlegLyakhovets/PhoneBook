@@ -2,6 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style type="text/css">
+    .tex{
+    padding-bottom: 10px;
+    }
+    .formc{
+    font-size: 20px;
+    font-style: monospace;
+    font-weight: 600;
+    float:left;
+    padding-right:40px;
+    padding-bottom: 20px;
+    paddig-top: 10px;
+}
+    .myButton {
+	box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+	background-color:#bddbfa;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	cursor:pointer;
+	color: black;
+	font-family:Arial;
+	font-size:18px;
+	font-weight:bold;
+	padding:6px 30px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #80b5ea 5%, #bddbfa 100%);
+	background-color:#80b5ea;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
        div::after {
          content: "";
          background: url('https://cdn.hipwallpaper.com/i/81/5/RKF5W1.jpg');
@@ -36,6 +72,10 @@
 
 <div class="container mt-5 mb-5">
     <h1 align="center">Edit User information</h1>
+    <form class="formc" th:each="tels : ${numbers}" th:action="'/user/' + ${last_name} + '/deletenumber'" method="post">
+       <div class="tex" th:text="${tels.number}"></div><button class="myButton" type="submit"><p
+        th:text="'DELETE'"></p></button>
+    </form>
     <form method="post">
         <input type="text" th:value="${first_name}" name="first_name" placeholder="enter First Name" class="form-control"><br>
         <input type="text" th:value="${last_name}" name="last_name" placeholder="enter Last Name" class="form-control"><br>

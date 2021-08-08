@@ -40,6 +40,15 @@
 
 <div class="container mt-5">
     <h1 align="center">PHONEBOOK</h1>
+
+    <form>
+        <div>
+            <label for="mySearch">Search by Last name</label>
+            <input type="search" id="mySearch" name="last_name">
+            <button>Search</button>
+        </div>
+    </form>
+
        <div th:each="el : ${users}" class="alert alert-info mt-2">
         <h3 align="center" th:text="${el.firstName}+' ' +${el.lastName}"/>
            <div><p class="phones">Phones:</p>

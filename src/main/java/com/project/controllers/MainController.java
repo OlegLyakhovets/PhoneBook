@@ -35,7 +35,16 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String indexPage(Model model){
+    public String indexPage(@RequestParam(name = "last_name", required = false) String last_name,
+                            Model model){
+        if(last_name != null)
+        {
+            if(!repo.existsUserByLastName(last_name)) return "redirect:/";
+            Optional<User> users = repo.findByLastName(last_name);
+            model.addAttribute("users", users);
+            model.addAttribute("last_name", last_name);
+            return "redirect:/user/{last_name}";
+        }
         Iterable<User> users = repo.findAll();
         model.addAttribute("users", users);
         return "index";
