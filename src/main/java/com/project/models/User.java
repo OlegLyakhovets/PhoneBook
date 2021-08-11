@@ -2,12 +2,13 @@ package com.project.models;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import com.project.models.Numbers;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 
 @Entity
 @NoArgsConstructor

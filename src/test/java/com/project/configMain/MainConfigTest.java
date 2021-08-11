@@ -1,13 +1,14 @@
-package com.project.main;
+package com.project.configMain;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 class MainConfigTest {
 
     ApplicationContext context = SpringApplication.run(PhoneBookApplication.class);

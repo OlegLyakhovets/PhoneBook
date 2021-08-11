@@ -4,21 +4,17 @@ import com.project.models.Numbers;
 import com.project.models.User;
 import com.project.repo.UserRepo;
 import com.project.service.UserValidate;
-import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.persistence.criteria.Predicate;
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 @Controller
 @RequestMapping("/")
 public class MainController {
@@ -31,14 +27,16 @@ public class MainController {
         this.repo = repo;
     }
 
-    //Method returns error page
+    /** Method returns error page
+    */
     @GetMapping("/error")
     public String errorPage(){
         return "error";
     }
 
-    //Home page method. Implements handling search by Last name or by phone number.
-    @GetMapping("/")
+    /** Home page method. Implements handling search by Last name or by phone number.
+    */
+     @GetMapping("/")
     public String indexPage(@RequestParam(name = "last_name", required = false) String last_name,
                             @RequestParam(name = "number", required = false) String number,
                             Model model){
@@ -64,13 +62,15 @@ public class MainController {
         return "index";
     }
 
-    //page for adding new record to phonebook
-    @GetMapping("/add")
-    public String addPost(){
+    /** page for adding new record to phonebook
+    */
+     @GetMapping("/add")
+    public String addUser(){
         return "user-add";
     }
 
-    //saving new record to phonebook. Сhecks data for compliance
+    /** saving new record to phonebook. Checks data for compliance
+    */
     @PostMapping("/add")
     public String addRecord(@RequestParam String firstName, @RequestParam String lastName,
                             @RequestParam String number,
@@ -89,7 +89,8 @@ public class MainController {
         return "redirect:/";
     }
 
-    //Returns page of certain user by Last Name
+    /** Returns page of certain user by Last Name
+    */
     @GetMapping("/user/{last_name}")
     public String userByLastName(@PathVariable(name = "last_name") String lastN, Model model){
         if(!repo.existsUserByLastName(lastN)) return "redirect:/";  //check for exist
@@ -108,9 +109,10 @@ public class MainController {
         return "user-page";
     }
 
-    //Edit page of certain user. Find user in database by last name, show
-    //data on client's page
-    @GetMapping("/user/{last_name}/edit")
+    /** Edit page of certain user. Find user in database by last name, show
+    * data on client's page
+    */
+     @GetMapping("/user/{last_name}/edit")
     public String userPageEdit(@PathVariable(name = "last_name") String last_name,
                                Model model){
         if(!repo.existsUserByLastName(last_name)) return "redirect:/";
@@ -130,9 +132,10 @@ public class MainController {
         return "user-edit";
     }
 
-    //Saves edited data to database
-    @PostMapping("/user/{last_name}/edit")
-    public String editPost(@PathVariable(name = "last_name") String lName,
+    /** Saves edited data to database
+    */
+     @PostMapping("/user/{last_name}/edit")
+    public String editUser(@PathVariable(name = "last_name") String lName,
                            @RequestParam String first_name, @RequestParam String last_name,
                            @RequestParam String number,
                            @RequestParam String email,
@@ -152,16 +155,18 @@ public class MainController {
         return "redirect:/user/{last_name}";
     }
 
-    //Delete user from database
-    @PostMapping("/user/{last_name}/delete")
-    public String deletePost(@PathVariable(name = "last_name") String last_name,
+    /** Delete user from database
+    */
+     @PostMapping("/user/{last_name}/delete")
+    public String deleteUser(@PathVariable(name = "last_name") String last_name,
                               Model model) {
         User userDelete = repo.findByLastName(last_name).orElseThrow();
         repo.delete(userDelete);
         return "redirect:/";
     }
 
-    //Deleting number
+    /** Deleting number
+    */
     @PostMapping("/user/{last_name}/deletenumber")
     public String deleteNumber(@PathVariable(name = "last_name") String last_name,
                                @RequestParam String number,

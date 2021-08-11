@@ -1,9 +1,11 @@
 package com.project.service;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 class UserValidateTest {
 
     @Test

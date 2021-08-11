@@ -1,5 +1,8 @@
 package com.project.service;
-
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 public class UserValidate {
 
     public static boolean nameValidate(String name){

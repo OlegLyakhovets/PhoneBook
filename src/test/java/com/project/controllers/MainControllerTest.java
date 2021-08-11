@@ -10,15 +10,28 @@ import org.springframework.ui.Model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 class MainControllerTest {
 
     UserRepo userRepo;
     MainController controller;
     Model model;
+    User user;
+
+    @BeforeEach
+    public void beforeEach(){
+        user = new User();
+        user.setLastName("Trump");
+        user.setFirstName("Donald");
+        user.setNumber("+1112223344");
+        user.setEmail("trump@mail.com");
+        user.setAddress("USA");
+    }
 
     public MainControllerTest(){
         userRepo = mock(UserRepo.class);
@@ -63,7 +76,7 @@ class MainControllerTest {
 
     @Test
     void addPost() {
-        assertEquals("user-add", controller.addPost());
+        assertEquals("user-add", controller.addUser());
     }
 
     @Test
@@ -95,12 +108,6 @@ class MainControllerTest {
     void userByLastName() {
         List<Numbers> list = new ArrayList<>();
         list.add(new Numbers("+1112223344"));
-        User user = new User();
-        user.setLastName("Trump");
-        user.setFirstName("Donald");
-        user.setNumber("+1112223344");
-        user.setEmail("trump@mail.com");
-        user.setAddress("USA");
         when(userRepo.existsUserByLastName("Trump")).thenReturn(true);
         when(userRepo.findByLastName("Trump"))
                 .thenReturn(Optional.of(user));
@@ -109,13 +116,44 @@ class MainControllerTest {
 
     @Test
     void userPageEdit() {
+        when(userRepo.existsUserByLastName("Trump")).thenReturn(true);
+        when(userRepo.findByLastName("Trump")).thenReturn(Optional.of(user));
+        assertEquals("user-edit", controller.userPageEdit("Trump",  model));
+    }
+    @Test
+    void userPageEditWhenNotFound() {
+        when(userRepo.existsUserByLastName("Trump")).thenReturn(false);
+        when(userRepo.findByLastName("Trump")).thenReturn(Optional.of(user));
+        assertEquals("redirect:/", controller.userPageEdit("Trump",  model));
     }
 
     @Test
     void editPost() {
+        when(userRepo.findByLastName("Trump")).thenReturn(Optional.of(user));
+        assertEquals("redirect:/user/{last_name}", controller.editUser("Trump",
+                "Donald", "Trump", "+1112223344",
+                "trump@mail.com", "USA, Washinghton", model));
+    }
+
+    @Test
+    void editPostFailedNameOrNumberOrEmail() {
+        when(userRepo.findByLastName("Trump")).thenReturn(Optional.of(user));
+        assertEquals("redirect:/error", controller.editUser("Trump",
+                "22Donald", "Trump", "ASD+1112223344",
+                "trump@mail.com", "USA, Washinghton", model));
     }
 
     @Test
     void deletePost() {
+        when(userRepo.findByLastName("Trump")).thenReturn(Optional.of(user));
+        assertEquals("redirect:/", controller.deleteUser("Trump", model));
     }
+
+    @Test
+    void deleteNumber(){
+        when(userRepo.findByLastName("Trump")).thenReturn(Optional.of(user));
+        assertEquals("redirect:/user/{last_name}",
+                controller.deleteNumber("Trump", "+1112223344", model));
+    }
+
 }

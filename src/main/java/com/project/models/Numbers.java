@@ -3,7 +3,10 @@ package com.project.models;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
-
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 @Embeddable
 public class Numbers {
     @Column(name="number")

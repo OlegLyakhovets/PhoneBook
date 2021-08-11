@@ -1,6 +1,11 @@
-package com.project.main;
+package com.project.configMain;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 
 public class SpringMvcConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override

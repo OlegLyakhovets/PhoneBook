@@ -2,13 +2,14 @@ package com.project.models;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Objects;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
-
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 class NumbersTest {
 
     Numbers number = new Numbers();
