@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style type="text/css">
-    div::after {
+   div::after {
          content: "";
          background: url('https://cdn.hipwallpaper.com/i/81/5/RKF5W1.jpg');
          opacity: 0.15;
@@ -56,7 +56,8 @@
         </div>
     </form>
 
-       <div th:each="el : ${users}" class="alert alert-info mt-2">
+
+       <div th:each="el : ${#lists.sort(users)}" class="alert alert-info mt-2">
         <h3 align="center" th:text="${el.firstName}+' ' +${el.lastName}"/>
            <div><p class="phones">Phones:</p>
         <p th:each="nums : ${el.numbers}" th:text="${nums.number}"></p>
@@ -73,8 +74,8 @@
         <p class="float-end mb-1">
             <a href="#">Back to top</a>
         </p>
-        <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.0/getting-started/introduction/">getting started guide</a>.</p>
+        <p class="mb-1">This is example application to show how Spring Boot works</p>
+        <p class="mb-0">Want to view another student projects? <a href="https://github.com/OlegLyakhovets">Visit my GitHub</a> </p>
     </div>
 </footer>
 

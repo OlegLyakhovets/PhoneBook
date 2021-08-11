@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +20,11 @@ public interface UserRepo extends JpaRepository<User, Long> {
             "and user_id=id;", nativeQuery = true)
     User findByNumbers(@Param("number")String number);
     User findByEmail(String email);
-    boolean existsUserByLastName(String model);
+    boolean existsUserByLastName(String lastName);
     @Modifying
-    @Query(value = "DELETE number FROM phonebook.number WHERE number = :number",nativeQuery = true)
-    int deleteNumberByNumber(@Param("number") String number);
+    @Transactional()
+    @Query(value = "DELETE FROM phonebook.user_numbers WHERE user_numbers.number = ?1", nativeQuery = true)
+    void deleteNumberByNumber(String number);
 
 
 

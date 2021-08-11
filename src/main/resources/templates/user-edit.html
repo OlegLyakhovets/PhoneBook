@@ -72,8 +72,10 @@
 
 <div class="container mt-5 mb-5">
     <h1 align="center">Edit User information</h1>
-    <form class="formc" th:each="tels : ${numbers}" th:action="'/user/' + ${last_name} + '/deletenumber'" method="post">
-       <div class="tex" th:text="${tels.number}"></div><button class="myButton" type="submit"><p
+    <form class="formc" id="number" th:each="tels : ${numbers}" th:action="'/user/' + ${last_name} + '/deletenumber'"
+           method="post"><p th:text="${tels.number}"></p>
+       <!--<div  class="tex" th:text="${tels.number}"></div>-->
+        <button class="myButton" name="number" th:value="${tels.number}" type="submit" formmethod="post"><p
         th:text="'DELETE'"></p></button>
     </form>
     <form method="post">
