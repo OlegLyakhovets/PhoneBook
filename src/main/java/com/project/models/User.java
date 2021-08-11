@@ -2,17 +2,18 @@ package com.project.models;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import com.project.models.Numbers;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements Comparable<User> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,5 +72,10 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return lastName.compareTo(o.getLastName());
     }
 }

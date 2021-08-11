@@ -2,7 +2,11 @@ package com.project.models;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-
+import java.util.Objects;
+/**
+ * Test Spring Boot web project
+ * @author Oleg Liakhovets
+ */
 @Embeddable
 public class Numbers {
     @Column(name="number")
@@ -26,5 +30,18 @@ public class Numbers {
     @Override
     public String toString() {
         return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Numbers)) return false;
+        Numbers numbers = (Numbers) o;
+        return Objects.equals(number, numbers.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

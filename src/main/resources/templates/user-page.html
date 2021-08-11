@@ -1,6 +1,63 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <style type="text/css">
+    form{
+    float:left;
+    padding-right:30px;
+}
+       div::after {
+         content: "";
+         background: url('https://cdn.hipwallpaper.com/i/81/5/RKF5W1.jpg');
+         opacity: 0.15;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+         position: absolute;
+         z-index: -1;
+}
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+	background-color:#bddbfa;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #80b5ea 5%, #bddbfa 100%);
+	background-color:#80b5ea;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+        h1{
+        font-size: 80px;
+         font-family: cursive;
+        font-weight: 600;
+        color: #000099;
+        }
+        h3{
+        font-size: 50px;
+        font-family: cursive;
+        font-weight: 600;
+        }
+  .refs{
+     font-family: monospace;
+     font-style: italic;
+     padding-right: 70px;
+  }
+    </style>
     <title>DEMO PHONEBOOK</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -10,18 +67,21 @@
 <header th:insert="blocks/header :: header"></header>
 
 <div class="container mt-5">
-    <h1>User information</h1>
+    <h1 align="center">User information</h1>
     <div class="alert alert-info mt-2">
-        <h3 th:text="${first_name}"/>
-        <p th:text="${last_name}"/>
-        <p th:text="${number}"/>
+        <h3 align="center" th:text="${first_name} +' '+${last_name}"/>
+        <p th:each="nums : ${number}" th:text="${nums.number}">Phones</p>
         <p th:text="${email}"/>
         <p th:text="${address}"/>
-      <!--  <a th:href="'' + ${last_name} + '/edit'" class="btn btn-warning">Edit</a><br>
-        <form th:action="'/' + delete${last_name} + '/delete'" method="post">
-            <button class="btn btn-warning mt-2" type="submit">Delete</button>
-        </form>-->
 
+        <form th:action="'/user/' + ${last_name} + '/edit'" method="get">
+            <button class="myButton" type="submit">Edit information</button>
+        </form>
+        <!--<a class="refs" th:href="'/user/' + ${last_name} + '/edit'">Edit information</a>-->
+        <form th:action="'/user/' + ${last_name} + '/delete'" method="post">
+            <button class="myButton" type="submit">Delete user</button>
+        </form>
+        <br>
     </div>
 </div>
 
